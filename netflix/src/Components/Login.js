@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from './Header';
 import { BG_URL } from '../utils/constants';
 import Validation from '../utils/validation';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../utils/Firebase';
 import { useNavigate } from "react-router-dom";
 
@@ -24,17 +24,21 @@ const Login = () => {
     e.preventDefault();
 
     // Validate form inputs
-    const message = Validation(email, password,);
+    const message = Validation(email, password,name);
     seterrormessage(message);
 
      if(message) return
      if(!issignform){
          //signup logic
-         createUserWithEmailAndPassword(auth, email, password)
+         createUserWithEmailAndPassword(auth, email, password,)
      .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
-    
+    updateProfile(user, {
+      displayName: name,
+     
+    })
+    console.log(user);
      navigate("/browse")
    
   })
@@ -51,7 +55,7 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-       
+          console.log(user);
          navigate("/browse")
       })
       .catch((error) => {
@@ -61,6 +65,7 @@ const Login = () => {
       });
      }
   };
+
 
   return (
     <div>
