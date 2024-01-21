@@ -5,7 +5,7 @@ const Browser = () => {
   return (
     <div>
       <Header/>
-      Browser
+     
     </div>
   )
 }
