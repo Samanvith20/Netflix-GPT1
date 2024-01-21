@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Header from './Header';
 import { BG_URL } from '../utils/constants';
 import Validation from '../utils/validation';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../utils/Firebase';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [issignform, setIssignform] = useState(true);
@@ -10,6 +13,8 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+    
+  const navigate=useNavigate()
 
   const handlesigninform = () => {
     setIssignform(!issignform);
@@ -23,6 +28,38 @@ const Login = () => {
     seterrormessage(message);
 
      if(message) return
+     if(!issignform){
+         //signup logic
+         createUserWithEmailAndPassword(auth, email, password)
+     .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    
+     navigate("/browse")
+   
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    seterrormessage(errorCode + "-" + errorMessage);
+
+  });
+
+     }
+     else{
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+       
+         navigate("/browse")
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        seterrormessage(errorCode + "-" + errorMessage);
+      });
+     }
   };
 
   return (
