@@ -69,7 +69,8 @@ const Login = () => {
 
   return (
     <div>
-      <Header />
+      <Header onToggleForm={handlesigninform} showSignInForm={issignform} />
+
       <div className='absolute'>
         <img src={BG_URL} alt="Netflix-bg" />
       </div>
@@ -77,7 +78,8 @@ const Login = () => {
         className="w-full md:w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80"
         onSubmit={(e) => e.preventDefault()}
       >
-        <h1 className='font-bold text-3xl py-4'>{issignform ? 'Sign in' : 'Sign up'}</h1>
+  
+     <h1 className='font-bold text-3xl py-4'>{issignform ? 'Sign in' : 'Sign up'}</h1>
         {!issignform && (
           <input
             type="text"

@@ -1,6 +1,4 @@
-
-
-import React, { useEffect, } from 'react';
+import React, { useEffect } from 'react';
 import { LOGO, USER_IAMGE } from '../utils/constants';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from 'firebase/auth';
@@ -9,7 +7,7 @@ import { auth } from '../utils/Firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { addUser, removeuser } from '../utils/userSlice';
 
-const Header = () => {
+const Header = ({ onToggleForm, showSignInForm }) => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -48,14 +46,23 @@ const Header = () => {
       <div className="absolute px-8 py-2 w-full bg-gradient-to-b from-black z-10 flex justify-between">
         <img src={LOGO} alt="Netflix-logo" className="w-44" />
         <div className="flex p-2">
-          {user && (
+          {user ? (
             <>
               <img className="w-12 h-12" alt="usericon" src={USER_IAMGE} />
               <button onClick={handleSignOut} className="font-bold text-white">
                 (Sign Out)
               </button>
             </>
-          ) }
+          ) : (
+            <div className="bg-red-700 p-2 rounded-md mb-2 mt-1">
+              <button
+                className="text-white text-sm focus:outline-none hover:text-gray-300 transition duration-300"
+                onClick={onToggleForm}
+              >
+                {showSignInForm ? 'Sign Up' : 'Sign In'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
