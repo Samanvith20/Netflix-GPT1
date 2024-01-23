@@ -11,7 +11,7 @@ const useTrailerplayingvideo = (movieID) => {
         "/videos?language=en-US",
       OPTIONS)
        const json =await data.json()
-       console.log(json.results);
+      //  console.log(json.results);
         const filterdData= json.results.filter((video)=>video.type="Trailer")
         const trailer =filterdData.length? filterdData[0]:json.results[0]
          dispatch(addtrailer(trailer))
