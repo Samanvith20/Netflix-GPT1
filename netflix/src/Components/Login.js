@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import Header from './Header';
 import { BG_URL } from '../utils/constants';
 import Validation from '../utils/validation';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../utils/Firebase';
 import { useNavigate } from "react-router-dom";
+import { handleSignUp, handleSignIn } from './Handlingfile';
 
 const Login = () => {
   const [issignform, setIssignform] = useState(true);
@@ -13,8 +12,8 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-    
-  const navigate=useNavigate()
+
+  const navigate = useNavigate();
 
   const handlesigninform = () => {
     setIssignform(!issignform);
@@ -24,46 +23,16 @@ const Login = () => {
     e.preventDefault();
 
     // Validate form inputs
-    const message = Validation(email, password,name);
+    const message = Validation(email, password, name);
     seterrormessage(message);
 
-     if(message) return
-     if(!issignform){
-         //signup logic
-         createUserWithEmailAndPassword(auth, email, password,)
-     .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    updateProfile(user, {
-      displayName: name,
-     
-    })
-    console.log(user);
-     navigate("/browse")
-   
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    seterrormessage(errorCode + "-" + errorMessage);
+    if (message) return;
 
-  });
-
-     }
-     else{
-      signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-          console.log(user);
-         navigate("/browse")
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        seterrormessage(errorCode + "-" + errorMessage);
-      });
-     }
+    if (!issignform) {
+      handleSignUp(email, password, name, seterrormessage, navigate);
+    } else {
+      handleSignIn(email, password, seterrormessage, navigate);
+    }
   };
 
 

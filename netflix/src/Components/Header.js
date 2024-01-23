@@ -6,12 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../utils/Firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { addUser, removeuser } from '../utils/userSlice';
+import { addToogle } from '../utils/GptSlice';
 
 const Header = ({ onToggleForm, showSignInForm }) => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const GptSearch= useSelector((store)=>store.Gpt.showGptSearch)
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {})
@@ -19,6 +20,9 @@ const Header = ({ onToggleForm, showSignInForm }) => {
         navigate('/error');
       });
   };
+   const  searchTogglefunction =()=>{
+     dispatch(addToogle())
+   }
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -48,6 +52,11 @@ const Header = ({ onToggleForm, showSignInForm }) => {
         <div className="flex p-2">
           {user ? (
             <>
+            <div>
+              <button className='text-white p-2 mx-2 my-2 bg-blue-800 mr-5'onClick={searchTogglefunction}>
+              {GptSearch ? "Homepage" : "GPT Search"}
+                </button>
+            </div>
               <img className="w-12 h-12" alt="usericon" src={USER_IAMGE} />
               <button onClick={handleSignOut} className="font-bold text-white">
                 (Sign Out)
