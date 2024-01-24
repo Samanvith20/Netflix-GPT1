@@ -18,3 +18,4 @@ export const LOGO =
       { identifier: "spanish", name: "Spanish" },
       {identifier:"telugu",name:"telugu"}
     ];
+     //export const openaiKey=process.env.REACT_APP_OPENAI_KEY
