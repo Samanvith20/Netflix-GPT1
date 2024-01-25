@@ -13,14 +13,14 @@ import { createSlice } from "@reduxjs/toolkit";
         addmovies:(state,action)=>{
               state.NowPlayingMovies=action.payload
         },
-        addtrailer:(state,actions)=>{
-            state.addTrailerVideo=actions.payload
+        addtrailer:(state,action)=>{
+            state.addTrailerVideo=action.payload
         },
         addpopular:(state,action)=>{
           state.addpopularVideos=action.payload
         },
-        addTopRated:(state,actions)=>{
-            state.addTopRatedMovies=actions.payload
+        addTopRated:(state,action)=>{
+            state.addTopRatedMovies=action.payload
         },
         addUpcomingMovies:(state,action)=>{
          state.addUpcomingMovies=action.payload

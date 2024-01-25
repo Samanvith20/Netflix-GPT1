@@ -1,7 +1,7 @@
 // handlingFile.js
 
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../utils/Firebase';
+import { auth } from '../../utils/Firebase';
 
 const handleSignUp = (email, password, name, setErrorMessage, navigate) => {
   createUserWithEmailAndPassword(auth, email, password)

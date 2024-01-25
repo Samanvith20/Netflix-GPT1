@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import { LOGO, USER_IAMGE } from '../utils/constants';
+import { LOGO, USER_IAMGE } from '../../utils/constants';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../utils/Firebase';
+import { auth } from '../../utils/Firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { addUser, removeuser } from '../utils/userSlice';
-import { addToogle } from '../utils/GptSlice';
-import { SUPPORTED_LANGUAGES } from '../utils/constants';
-import { changeLanguage } from '../utils/languageSlice';
+import { addUser, removeuser } from '../../utils/Store/userSlice';
+import { addToogle } from '../../utils/Store/GptSlice';
+import { SUPPORTED_LANGUAGES } from '../../utils/constants';
+import { changeLanguage } from '../../utils/Store/languageSlice';
 
 const Header = ({ onToggleForm, showSignInForm }) => {
   const user = useSelector((store) => store.user);

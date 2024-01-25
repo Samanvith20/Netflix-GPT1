@@ -1,27 +1,27 @@
 import { useEffect } from "react";
-import { OPTIONS } from "../utils/constants";
+import { OPTIONS } from "../constants";
 import { useDispatch } from "react-redux";
-import { addTopRated, } from "../utils/movieSlice";
+import { addpopular } from "../Store/movieSlice";
 
-const useTopRatedmovies = () => {
+const usePopularMovies = () => {
   const dispatch = useDispatch();
 
-  const Ratedmovies = async () => {
+  const popularmovies = async () => {
     try {
       const data = await fetch(
-        "https://api.themoviedb.org/3/movie/top_rated?page=1",
+        "https://api.themoviedb.org/3/movie/popular?page=1",
         OPTIONS
       );
       const json = await data.json();
-      dispatch(addTopRated(json.results));
+      dispatch(addpopular(json.results));
     } catch (error) {
       console.error("Error fetching popular movies:", error);
     }
   };
 
   useEffect(() => {
-    Ratedmovies();
+    popularmovies();
   }, []); 
 };
 
-export default useTopRatedmovies;
+export default usePopularMovies;

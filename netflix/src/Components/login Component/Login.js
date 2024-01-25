@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from './Header';
-import { BG_URL } from '../utils/constants';
-import Validation from '../utils/validation';
+import { BG_URL } from '../../utils/constants';
+import Validation from '../../utils/validation';
 import { useNavigate } from "react-router-dom";
 import { handleSignUp, handleSignIn } from './Handlingfile';
 
